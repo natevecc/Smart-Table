@@ -259,7 +259,7 @@ ng.module('smart-table')
         attr.$observe('stSearch', function (newValue, oldValue) {
           var input = element[0].value;
           if (newValue !== oldValue && input) {
-            if(ng.isUndefined(ctrl.tableState().search = {})) {
+            if(ng.isUndefined(ctrl.tableState().search)) {
               ctrl.tableState().search = {};
             }
             tableCtrl.search(input, newValue);
