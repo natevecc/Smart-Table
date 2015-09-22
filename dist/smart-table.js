@@ -288,6 +288,18 @@ ng.module('smart-table')
             promise = null;
           }, throttle);
         });
+
+        if(attr.ngModel) {
+          scope.$watch(attr.ngModel, function(ngModel, old) {
+            if (promise !== null) {
+              $timeout.cancel(promise);
+            }
+            promise = $timeout(function() {
+              tableCtrl.search(ngModel, attr.stSearch);
+              promise = null;
+            }, 0);
+          });
+        }
       }
     };
   }]);
