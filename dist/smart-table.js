@@ -133,7 +133,7 @@ ng.module('smart-table')
       input = ng.isString(input) ? input.trim() : input;
       $parse(prop).assign(predicateObject, input);
       // to avoid to filter out null value
-      if (!input) {
+      if (ng.isUndefined(input) || input === null) {
         deepDelete(predicateObject, prop);
       }
       tableState.search.predicateObject = predicateObject;
@@ -272,7 +272,7 @@ ng.module('smart-table')
         }, function (newValue, oldValue) {
           var predicateExpression = attr.stSearch || '$';
           if (newValue.predicateObject && $parse(predicateExpression)(newValue.predicateObject) !== element[0].value) {
-            element[0].value = $parse(predicateExpression)(newValue.predicateObject) || '';
+            element[0].value = $parse(predicateExpression)(newValue.predicateObject);
           }
         }, true);
 

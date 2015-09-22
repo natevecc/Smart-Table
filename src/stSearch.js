@@ -24,7 +24,7 @@ ng.module('smart-table')
         }, function (newValue, oldValue) {
           var predicateExpression = attr.stSearch || '$';
           if (newValue.predicateObject && $parse(predicateExpression)(newValue.predicateObject) !== element[0].value) {
-            element[0].value = $parse(predicateExpression)(newValue.predicateObject) || '';
+            element[0].value = $parse(predicateExpression)(newValue.predicateObject);
           }
         }, true);
 
