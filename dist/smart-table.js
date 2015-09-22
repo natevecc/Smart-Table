@@ -271,8 +271,13 @@ ng.module('smart-table')
           return ctrl.tableState().search;
         }, function (newValue, oldValue) {
           var predicateExpression = attr.stSearch || '$';
-          if (newValue.predicateObject && $parse(predicateExpression)(newValue.predicateObject) !== element[0].value) {
-            element[0].value = $parse(predicateExpression)(newValue.predicateObject);
+          var value = $parse(predicateExpression)(newValue.predicateObject);
+          if (newValue.predicateObject && value !== element[0].value) {
+            if(ng.isUndefined(value) && value === null) {
+              element[0].value = '';
+            } else {
+              element[0].value = $parse(predicateExpression)(newValue.predicateObject);
+            }
           }
         }, true);
 
