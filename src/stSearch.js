@@ -25,7 +25,7 @@ ng.module('smart-table')
           var predicateExpression = attr.stSearch || '$';
           var value = $parse(predicateExpression)(newValue.predicateObject);
           if (newValue.predicateObject && value !== element[0].value) {
-            if(ng.isUndefined(value) && value === null) {
+            if(ng.isUndefined(value) || value === null) {
               element[0].value = '';
             } else {
               element[0].value = $parse(predicateExpression)(newValue.predicateObject);
